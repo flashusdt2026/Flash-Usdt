@@ -1,209 +1,1332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flash USDT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash USDT - Premium Crypto Solution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-body {
-  margin:0;
-  font-family:Arial;
-  background:black;
-  color:white;
-}
+        :root {
+            --primary-blue: #00d4ff;
+            --primary-glow: rgba(0, 212, 255, 0.4);
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(15, 15, 20, 0.95);
+            --border-blue: rgba(0, 212, 255, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --success: #00ff88;
+        }
 
-/* HEADER */
-h1 {
-  text-align:center;
-  margin-top:30px;
-  font-size:40px;
-}
-h1 span {
-  color:#00aaff;
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
 
-/* CARDS */
-.container {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
-  padding:20px;
-}
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
 
-.card {
-  background:#0b0f1a;
-  padding:20px;
-  border-radius:15px;
-  width:260px;
-  text-align:center;
-  box-shadow:0 0 15px rgba(0,170,255,0.4);
-}
+        .bg-glow::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 100, 255, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 40%);
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
 
-.price {
-  color:#00aaff;
-  font-size:20px;
-}
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
 
-button {
-  margin-top:10px;
-  padding:10px;
-  width:100%;
-  background:#00aaff;
-  border:none;
-  color:white;
-  border-radius:8px;
-  cursor:pointer;
-}
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
 
-/* MODAL */
-.modal {
-  display:none;
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.8);
-  justify-content:center;
-  align-items:center;
-}
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite;
+        }
 
-.modal-content {
-  background:#0b0f1a;
-  padding:20px;
-  border-radius:10px;
-  width:300px;
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
 
-input {
-  width:70%;
-  padding:5px;
-}
+        .main-content {
+            position: relative;
+            z-index: 2;
+        }
 
-.copy {
-  background:#00aaff;
-  border:none;
-  padding:5px;
-  margin-left:5px;
-}
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px 40px;
+            position: relative;
+        }
 
-/* WHATSAPP */
-.whatsapp {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  padding:15px;
-  border-radius:50%;
-  cursor:pointer;
-}
-</style>
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--border-blue);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero-badge .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 212, 255, 0); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-title .flash {
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+            position: relative;
+        }
+
+        .hero-title .usdt {
+            color: var(--primary-blue);
+            text-shadow: 0 0 60px rgba(0, 212, 255, 0.6), 0 0 120px rgba(0, 100, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 300px;
+            background: radial-gradient(ellipse, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            filter: blur(60px);
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-blue), transparent);
+            border-radius: 2px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-blue), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-blue);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 212, 255, 0.1);
+        }
+
+        .pricing-card:hover::before {
+            opacity: 1;
+        }
+
+        .pricing-card.popular {
+            border-color: var(--border-blue);
+            transform: scale(1.02);
+        }
+
+        .pricing-card.popular::before {
+            opacity: 1;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 12px;
+            right: -30px;
+            background: linear-gradient(135deg, var(--primary-blue), #0066ff);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 30px;
+            transform: rotate(45deg);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .package-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+
+        .package-amount span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--primary-blue);
+        }
+
+        .package-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 24px;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 100, 255, 0.1));
+            border: 1px solid var(--border-blue);
+            border-radius: 12px;
+            color: var(--primary-blue);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .buy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .buy-btn:hover::before {
+            left: 100%;
+        }
+
+        .buy-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.25), rgba(0, 100, 255, 0.2));
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        .buy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .features-container {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-blue), transparent);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(0, 212, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(0, 212, 255, 0.08);
+            border-color: var(--border-blue);
+            transform: translateX(5px);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 100, 255, 0.1));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.15);
+        }
+
+        .feature-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: linear-gradient(180deg, #111118 0%, #0a0a0f 100%);
+            border: 1px solid var(--border-blue);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 520px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px;
+            position: relative;
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 212, 255, 0.1);
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            transform: rotate(90deg);
+        }
+
+        .payment-section {
+            margin-bottom: 24px;
+        }
+
+        .payment-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .crypto-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+        }
+
+        .crypto-box:hover {
+            border-color: var(--border-blue);
+            background: rgba(0, 212, 255, 0.08);
+        }
+
+        .crypto-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .crypto-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .bep20 .crypto-icon { background: rgba(0, 212, 255, 0.2); color: var(--primary-blue); }
+        .trc20 .crypto-icon { background: rgba(255, 0, 128, 0.2); color: #ff0080; }
+
+        .address-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 10px 14px;
+        }
+
+        .address-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            word-break: break-all;
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .copy-btn {
+            padding: 8px 14px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--border-blue);
+            border-radius: 8px;
+            color: var(--primary-blue);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .copy-btn:hover {
+            background: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.15);
+        }
+
+        .copy-btn.copied {
+            background: rgba(0, 255, 136, 0.15);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .more-options-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 100, 255, 0.05));
+            border: 1px dashed var(--border-blue);
+            border-radius: 12px;
+            color: var(--primary-blue);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .more-options-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 100, 255, 0.1));
+            border-style: solid;
+        }
+
+        .more-options-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .more-options-content.expanded {
+            max-height: 500px;
+        }
+
+        .payment-detail {
+            background: rgba(0, 212, 255, 0.03);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+
+        .payment-detail-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .upload-section {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .upload-area {
+            border: 2px dashed rgba(0, 212, 255, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(0, 212, 255, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-area:hover {
+            border-color: var(--border-blue);
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .upload-area.has-file {
+            border-color: var(--success);
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+            opacity: 0.7;
+        }
+
+        .upload-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .upload-hint {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-name {
+            color: var(--success);
+            font-weight: 600;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .file-name.show {
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary-blue), #0066ff);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 100, 255, 0.1));
+            border: 1px solid var(--border-blue);
+            border-radius: 12px;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 2000;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.success {
+            border-color: var(--success);
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .toast-icon {
+            font-size: 1.2rem;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: inherit;
+            animation: whatsappPulse 2s infinite;
+            z-index: -1;
+        }
+
+        @keyframes whatsappPulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 212, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 212, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 50vh;
+                padding: 60px 16px 30px;
+            }
+
+            .section {
+                padding: 40px 16px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-container {
+                padding: 24px;
+            }
+
+            .modal {
+                padding: 24px;
+                margin: 10px;
+            }
+
+            .whatsapp-float {
+                width: 52px;
+                height: 52px;
+                font-size: 1.5rem;
+                bottom: 16px;
+                right: 16px;
+            }
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="bg-glow"></div>
+    <div class="particles" id="particles"></div>
 
-<h1>FLASH <span>USDT</span></h1>
+    <div class="main-content">
+        <section class="hero">
+            <div class="hero-glow"></div>
+            <div class="hero-badge">
+                <span class="pulse"></span>
+                Secure & Instant Transactions
+            </div>
+            <h1 class="hero-title">
+                <span class="flash">FLASH</span> <span class="usdt">USDT</span>
+            </h1>
+            <p class="hero-subtitle">
+                Premium cryptocurrency solution with instant confirmation, unlimited transfers, and maximum security for your digital assets.
+            </p>
+        </section>
 
-<div class="container">
+        <section class="section">
+            <h2 class="section-title animate-on-scroll">Choose Your Package</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card animate-on-scroll">
+                    <div class="package-amount">3,000 <span>USDT</span></div>
+                    <div class="package-price">$25.00</div>
+                    <button class="buy-btn" onclick="openModal(3000, 25)">
+                        <i class="fas fa-bolt"></i> Buy Now
+                    </button>
+                </div>
+                <div class="pricing-card animate-on-scroll">
+                    <div class="package-amount">6,000 <span>USDT</span></div>
+                    <div class="package-price">$35.00</div>
+                    <button class="buy-btn" onclick="openModal(6000, 35)">
+                        <i class="fas fa-bolt"></i> Buy Now
+                    </button>
+                </div>
+                <div class="pricing-card animate-on-scroll">
+                    <div class="package-amount">10,000 <span>USDT</span></div>
+                    <div class="package-price">$50.00</div>
+                    <button class="buy-btn" onclick="openModal(10000, 50)">
+                        <i class="fas fa-bolt"></i> Buy Now
+                    </button>
+                </div>
+                <div class="pricing-card animate-on-scroll">
+                    <div class="package-amount">15,000 <span>USDT</span></div>
+                    <div class="package-price">$80.00</div>
+                    <button class="buy-btn" onclick="openModal(15000, 80)">
+                        <i class="fas fa-bolt"></i> Buy Now
+                    </button>
+                </div>
+                <div class="pricing-card popular animate-on-scroll">
+                    <div class="popular-badge">Popular</div>
+                    <div class="package-amount">30,000 <span>USDT</span></div>
+                    <div class="package-price">$150.00</div>
+                    <button class="buy-btn" onclick="openModal(30000, 150)">
+                        <i class="fas fa-bolt"></i> Buy Now
+                    </button>
+                </div>
+                <div class="pricing-card animate-on-scroll">
+                    <div class="package-amount">100,000 <span>USDT</span></div>
+                    <div class="package-price">$300.00</div>
+                    <button class="buy-btn" onclick="openModal(100000, 300)">
+                        <i class="fas fa-bolt"></i> Buy Now
+                    </button>
+                </div>
+            </div>
+        </section>
 
-<div class="card">
-<h3>3000 USDT</h3>
-<p class="price">$25</p>
-<button onclick="openModal()">Buy Now</button>
-</div>
+        <section class="section">
+            <h2 class="section-title animate-on-scroll">Why Choose Flash USDT</h2>
+            <div class="features-container animate-on-scroll">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check"></i></div>
+                        <span class="feature-text">Instant Confirmation</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check"></i></div>
+                        <span class="feature-text">Transaction ID Provided</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check"></i></div>
+                        <span class="feature-text">Ready for Trading</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check"></i></div>
+                        <span class="feature-text">Unlimited Wallet Transfers</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check"></i></div>
+                        <span class="feature-text">Unlimited Validity Period</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fas fa-check"></i></div>
+                        <span class="feature-text">Premium Security Standards</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<div class="card">
-<h3>6000 USDT</h3>
-<p class="price">$35</p>
-<button onclick="openModal()">Buy Now</button>
-</div>
+        <div style="height: 80px;"></div>
+    </div>
 
-<div class="card">
-<h3>10,000 USDT</h3>
-<p class="price">$50</p>
-<button onclick="openModal()">Buy Now</button>
-</div>
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-title">Complete Your Purchase</div>
+                <div class="modal-subtitle" id="modalPackageInfo">Package details will appear here</div>
+            </div>
 
-<div class="card">
-<h3>15,000 USDT</h3>
-<p class="price">$80</p>
-<button onclick="openModal()">Buy Now</button>
-</div>
+            <div class="payment-section">
+                <div class="payment-label"><i class="fab fa-bitcoin"></i> Crypto Payments</div>
+                
+                <div class="crypto-box bep20">
+                    <div class="crypto-header">
+                        <div class="crypto-icon"><i class="fas fa-link"></i></div>
+                        <span>BEP20 Address</span>
+                    </div>
+                    <div class="address-box">
+                        <span class="address-text" id="bep20Addr">0xe0598d5a13c3e17b435fb1e37cf60cc9c71a4757</span>
+                        <button class="copy-btn" onclick="copyToClipboard('bep20Addr', this)">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
 
-</div>
+                <div class="crypto-box trc20">
+                    <div class="crypto-header">
+                        <div class="crypto-icon"><i class="fas fa-link"></i></div>
+                        <span>TRC20 Address</span>
+                    </div>
+                    <div class="address-box">
+                        <span class="address-text" id="trc20Addr">TWKf9fjT4euGuZmbtqtLaMtmk56wYC2WPs</span>
+                        <button class="copy-btn" onclick="copyToClipboard('trc20Addr', this)">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-<div class="modal-content">
+            <button class="more-options-btn" onclick="toggleMoreOptions()">
+                <i class="fas fa-plus-circle"></i>
+                <span id="moreBtnText">More Payment Options</span>
+                <i class="fas fa-chevron-down" id="moreBtnIcon" style="transition: transform 0.3s;"></i>
+            </button>
 
-<h3>Payment Method</h3>
+            <div class="more-options-content" id="moreOptionsContent">
+                <div class="payment-detail">
+                    <div class="payment-detail-title">
+                        <i class="fas fa-mobile-alt" style="color: var(--primary-blue);"></i>
+                        Easypaisa
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Number</span>
+                        <span class="detail-value">
+                            <span id="easypaisaNum">03254698012</span>
+                            <button class="copy-btn" style="padding: 4px 10px; font-size: 0.7rem;" onclick="copyToClipboard('easypaisaNum', this)">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Confirmation Name</span>
+                        <span class="detail-value">Sumera Afzal</span>
+                    </div>
+                </div>
 
-<p>BEP20:</p>
-<input id="bep" value="0xe0598d5a13c3e17b435fb1e37cf60cc9c71a4757">
-<button class="copy" onclick="copy('bep')">Copy</button>
+                <div class="payment-detail">
+                    <div class="payment-detail-title">
+                        <i class="fas fa-university" style="color: var(--primary-blue);"></i>
+                        Bank Transfer
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Bank</span>
+                        <span class="detail-value">Meezan Bank</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Account Number</span>
+                        <span class="detail-value">
+                            <span id="bankAcc">11520114608417</span>
+                            <button class="copy-btn" style="padding: 4px 10px; font-size: 0.7rem;" onclick="copyToClipboard('bankAcc', this)">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Confirmation Name</span>
+                        <span class="detail-value">Muhammad Qasim</span>
+                    </div>
+                </div>
+            </div>
 
-<p>TRC20:</p>
-<input id="trc" value="TWKf9fjT4euGuZmbtqtLaMtmk56wYC2WPs">
-<button class="copy" onclick="copy('trc')">Copy</button>
+            <div class="upload-section">
+                <div class="payment-label"><i class="fas fa-upload"></i> Upload Payment Proof</div>
+                <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                    <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <div class="upload-text">Click to upload screenshot</div>
+                    <div class="upload-hint">JPG, PNG or PDF up to 10MB</div>
+                    <div class="file-name" id="fileName"></div>
+                    <input type="file" class="file-input" id="fileInput" accept="image/*,.pdf" onchange="handleFileSelect(event)">
+                </div>
+                <button class="submit-btn" id="submitBtn" onclick="submitPayment()">
+                    <i class="fas fa-paper-plane"></i> Submit Payment Proof
+                </button>
+            </div>
+        </div>
+    </div>
 
-<p>Easypaisa (Sumera Afzal):</p>
-<input id="easy" value="03254698012">
-<button class="copy" onclick="copy('easy')">Copy</button>
+    <div class="toast" id="toast">
+        <span class="toast-icon" id="toastIcon">✓</span>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
 
-<p>Bank (Muhammad Qasim):</p>
-<input id="bank" value="11520114608417">
-<button class="copy" onclick="copy('bank')">Copy</button>
+    <a href="https://wa.me/923300258291" class="whatsapp-float" target="_blank" title="Contact Support">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-<br><br>
+    <script>
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
 
-<input type="file" id="proof">
-<button onclick="send()">Upload Proof</button>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-<br><br>
-<button onclick="closeModal()">Close</button>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
 
-</div>
-</div>
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-<!-- WHATSAPP -->
-<div class="whatsapp" onclick="whatsapp()">💬</div>
+        let currentPackage = {};
 
-<script>
+        function openModal(amount, price) {
+            currentPackage = { amount, price };
+            document.getElementById('modalPackageInfo').textContent = amount.toLocaleString() + ' USDT for $' + price + '.00';
+            document.getElementById('paymentModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-function openModal(){
-  document.getElementById("modal").style.display="flex";
-}
+        function closeModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+            document.body.style.overflow = '';
+            document.getElementById('fileInput').value = '';
+            document.getElementById('fileName').textContent = '';
+            document.getElementById('fileName').classList.remove('show');
+            document.getElementById('uploadArea').classList.remove('has-file');
+            document.getElementById('moreOptionsContent').classList.remove('expanded');
+            document.getElementById('moreBtnIcon').style.transform = 'rotate(0deg)';
+            document.getElementById('moreBtnText').textContent = 'More Payment Options';
+        }
 
-function closeModal(){
-  document.getElementById("modal").style.display="none";
-}
+        document.getElementById('paymentModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
 
-function copy(id){
-  let text = document.getElementById(id);
-  text.select();
-  document.execCommand("copy");
-  alert("Copied");
-}
+        function toggleMoreOptions() {
+            const content = document.getElementById('moreOptionsContent');
+            const icon = document.getElementById('moreBtnIcon');
+            const text = document.getElementById('moreBtnText');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.style.transform = 'rotate(0deg)';
+                text.textContent = 'More Payment Options';
+            } else {
+                content.classList.add('expanded');
+                icon.style.transform = 'rotate(180deg)';
+                text.textContent = 'Hide Payment Options';
+            }
+        }
 
-function whatsapp(){
-  window.open("https://wa.me/923300258291");
-}
+        async function copyToClipboard(elementId, btn) {
+            const text = document.getElementById(elementId).textContent;
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('Copied to clipboard!', 'success');
+                
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('Copied to clipboard!', 'success');
+            }
+        }
 
-// TELEGRAM MESSAGE ONLY
-function send(){
-  fetch("https://api.telegram.org/bot8680189202:AAFJ9h6cl9zvWnWxI7xDm9jJn38dkeIJHts/sendMessage",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-      chat_id:"7519338521",
-      text:"New Payment Proof Submitted"
-    })
-  });
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+            
+            toastMessage.textContent = message;
+            toast.className = 'toast show ' + type;
+            
+            if (type === 'success') {
+                toastIcon.textContent = '✓';
+            } else {
+                toastIcon.textContent = 'ℹ';
+            }
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
 
-  alert("Submitted (Check Telegram)");
-}
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            const fileNameEl = document.getElementById('fileName');
+            const uploadArea = document.getElementById('uploadArea');
+            
+            if (file) {
+                fileNameEl.textContent = 'Selected: ' + file.name;
+                fileNameEl.classList.add('show');
+                uploadArea.classList.add('has-file');
+            }
+        }
 
-</script>
+        async function submitPayment() {
+            const fileInput = document.getElementById('fileInput');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (!fileInput.files[0]) {
+                showToast('Please upload payment proof first');
+                return;
+            }
 
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner"></span> Sending...';
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = async function(e) {
+                const caption = '🔔 New Payment Submitted\n\n📦 Package: ' + currentPackage.amount.toLocaleString() + ' USDT\n💰 Price: $' + currentPackage.price + '.00\n📄 File: ' + file.name + '\n⏰ Time: ' + new Date().toLocaleString();
+                
+                try {
+                    await fetch('https://api.telegram.org/bot8680189202:AAFJ9h6cl9zvWnWxI7xDm9jJn38dkeIJHts/sendMessage', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            chat_id: '7519338521',
+                            text: caption,
+                            parse_mode: 'HTML'
+                        })
+                    });
+
+                    const formData = new FormData();
+                    formData.append('chat_id', '7519338521');
+                    formData.append('document', file);
+                    formData.append('caption', 'Payment Proof');
+
+                    await fetch('https://api.telegram.org/bot8680189202:AAFJ9h6cl9zvWnWxI7xDm9jJn38dkeIJHts/sendDocument', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    showToast('Payment proof submitted successfully!', 'success');
+                    setTimeout(() => {
+                        closeModal();
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Payment Proof';
+                    }, 2000);
+                } catch (error) {
+                    showToast('Failed to send. Please try again or contact support.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Payment Proof';
+                }
+            };
+            
+            reader.readAsDataURL(file);
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
 </body>
 </html>
